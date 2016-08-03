@@ -12,7 +12,7 @@ function join(dest) { return path.resolve(__dirname, dest) }
 
 // Calls the preivously defined join function, but includes the 'web/static' as
 // part of the call. This is where all the pre-compiled assets are loaded.
-function web(dest) { return join('web/static' + dest) }
+function web(dest) { return join('web/static/' + dest) }
 
 var config = module.exports = {
   // We set two entries here. One for style sheets (sass), one for JS. These
@@ -25,7 +25,7 @@ var config = module.exports = {
   },
 
   output: {
-    path: join('priv/static'),
+    path: join('priv/static/'),
     filename: 'js/application.js'
   },
 
