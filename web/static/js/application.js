@@ -7,6 +7,8 @@ import Root from './containers/root'
 
 // Create the store, pass browserHistory
 const store = configureStore(browserHistory)
+
+// Configure the
 const history = syncHistoryWithStore(browserHistory, store)
 
 const target = document.getElementById('main_container')
