@@ -11,6 +11,11 @@ defmodule PhoenixTrello.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    # Looks for the token in the Authorization header
+    plug Guardian.Plug.VerifyHeader
+    # Makes the current resource available through
+    # Guardian.Plug.current_resource(conn) if the token is present
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", PhoenixTrello do
@@ -24,6 +29,8 @@ defmodule PhoenixTrello.Router do
 
     scope "/v1" do
       post "/registrations", RegistrationController, :create
+      post "/sessions", SessionController, :create
+      delete "/sessions", SessionController, :delete
     end
   end
 end
