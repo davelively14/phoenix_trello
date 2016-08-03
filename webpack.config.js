@@ -7,10 +7,11 @@ var webpack = require('webpack')
 // The path.resolve is a Node.js function takes a sequence of paths and returns
 // an absolute path. __dirname refers to whatever the current directory
 // in which the script is executed, in this case the root directory. Used in the
-// creation of the output path.
+// creation of the output path. Name is confusing
 function join(dest) { return path.resolve(__dirname, dest) }
 
-// The join function takes a sequence of 
+// Calls the preivously defined join function, but includes the 'web/static' as
+// part of the call. This is where all the pre-compiled assets are loaded.
 function web(dest) { return join('web/static' + dest) }
 
 var config = module.exports = {
