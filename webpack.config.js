@@ -4,10 +4,18 @@ var path = require('path')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var webpack = require('webpack')
 
+// The path.resolve is a Node.js function takes a sequence of paths and returns
+// an absolute path. __dirname refers to whatever the current directory
+// in which the script is executed, in this case the root directory. Used in the
+// creation of the output path.
 function join(dest) { return path.resolve(__dirname, dest) }
+
+// The join function takes a sequence of 
 function web(dest) { return join('web/static' + dest) }
 
 var config = module.exports = {
+  // We set two entries here. One for style sheets (sass), one for JS. These
+  // will appear as requires in the output file.
   entry: {
     application: [
       web('css/application.sass'),
