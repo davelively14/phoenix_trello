@@ -5,6 +5,9 @@ import {routeActions} from 'react-router-redux'
 import Header from '../layouts/header'
 
 class AuthenticatedContainer extends React.Component {
+
+  // This is good for session preservation. It doesn't depend on state, so if
+  // the phoenixAuthToken is still active, login will survive user refresh. 
   componentDidMount() {
     const {dispatch, currentUser} = this.props
     const phoenixAuthToken = localStorage.getItem('phoenixAuthToken')
