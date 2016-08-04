@@ -15,7 +15,7 @@ const Actions = {}
 // Also, the silly function((data) => { functionBody}) horse shit...just do it:
 // function(data) { functionBody }
 
-Actions.sign_up(data) {
+Actions.sign_up = ((data) => {
   return dispatch => {
     httpPost('/api/v1/registrations', {user: data})
       .then((data) => {
@@ -38,6 +38,6 @@ Actions.sign_up(data) {
           })
       })
   }
-}
+})
 
 export default Actions
