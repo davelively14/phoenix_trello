@@ -10,6 +10,8 @@ defmodule PhoenixTrello.User do
     field :password, :string, virtual: true
     field :encrypted_password, :string
     has_many :owned_boards, PhoenixTrello.Board
+    has_many :user_boards, PhoenixTrello.UserBoard
+    has_many :boards, through: [:user_boards, :board]
 
     timestamps()
   end

@@ -26,14 +26,14 @@ defmodule PhoenixTrello.Router do
       post "/sessions", SessionController, :create
       delete "/sessions", SessionController, :delete
       get "/current_user", CurrentUserController, :show
-      resources "boards", BoardsController, only: [:index, :create]
+      resources "/boards", BoardsController, only: [:index, :create]
     end
   end
 
   scope "/", PhoenixTrello do
     pipe_through :browser # Use the default browser stack
 
-    get "*path", PageController, :index
+    get "/path", PageController, :index
   end
 
 end

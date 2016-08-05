@@ -29,6 +29,14 @@ defmodule PhoenixTrello.BoardController do
 
     case Repo.insert(changeset) do
       {:ok, board} ->
+
+        # Create the UserBoard immediately and build association to the board
+        # and creator, the current_user.
+        board
+        |> build_assoc(:user_boards)
+        |> UserBoard.changeset(%{user_id: current_user.id})
+        |> Repo.insert!
+
         conn
         |> put_status(:created)
         |> render("show.json", board: board)
