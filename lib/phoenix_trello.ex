@@ -12,8 +12,9 @@ defmodule PhoenixTrello do
       supervisor(PhoenixTrello.Repo, []),
       # Start the endpoint when the application starts
       supervisor(PhoenixTrello.Endpoint, []),
-      # Start your own worker by calling: PhoenixTrello.Worker.start_link(arg1, arg2, arg3)
-      # worker(PhoenixTrello.Worker, [arg1, arg2, arg3]),
+      # Every time the app starts, this worker will start. An empty map will be
+      # passed as the initial state.
+      worker(PhoenixTrello.BoardChannel.Monitor, [%{}])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
