@@ -24,6 +24,13 @@ export function setCurrentUser(dispatch, user) {
       channel: channel
     })
   })
+
+  channel.on('boards:add', (msg) => {
+    dispatch({
+      type: Constants.BOARDS_ADDED,
+      board: msg.board
+    })
+  })
 }
 
 const Actions = {

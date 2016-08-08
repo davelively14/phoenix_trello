@@ -18,6 +18,11 @@ const Actions = {
           channel: channel
         })
       })
+
+      channel.on('member:added', (msg) => {
+        type: Constants.CURRENT_BOARD_MEMBER_ADDED,
+        channel: msg.user
+      })
     }
   },
 

@@ -2,7 +2,13 @@ import Constants from '../constants'
 
 // Default is no currentBoard selected
 const initialState = {
+  connectedUsers: [],
   channel: null,
+  showForm: false,
+  showUsersForm: false,
+  editingListId: null,
+  addingNewCardInListId: null,
+  error: null,
   fetching: true
 }
 
@@ -16,6 +22,11 @@ export default function reducer(state = initialState, action = {}) {
 
     case Constants.CURRENT_BOARD_CONNECTED_TO_CHANNEL:
       return {...state, channel: action.channel}
+
+    case Constants.CURRENT_BOARD_MEMBER_ADDED:
+      const {memnbers} = state
+      members.push(action.user)
+      return {...state, members: members, showUsersForm: false}
 
     default:
       return state
