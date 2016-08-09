@@ -23,6 +23,13 @@ const Actions = {
         type: Constants.CURRENT_BOARD_MEMBER_ADDED,
         channel: msg.user
       })
+
+      channel.on('user:joined', (msg) => {
+        dispatch({
+          type: Constants.CURRENT_BOARD_CONNECTED_USERS,
+          users: msg.users
+        })
+      })
     }
   },
 
