@@ -13,6 +13,14 @@ defmodule PhoenixTrello.BoardChannel do
     {:ok, %{board: board}, assign(socket, :board, board)}
   end
 
+  def terminate(_reason, socket) do
+    board_id = Board.slug_id(socket.assigns.board)
+    user_id = socket.assigns.current_user.id
+
+    # NOTE: we haven't implemented the user_left function yet.
+    broadcast! socket, "user:left", %{users: Monitor.user_left(board_id, user_id)}
+  end
+
   def handle_in("members:add", %{"email" => email}, socket) do
     try do
       board = socket.assigns.board
