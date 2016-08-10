@@ -33,6 +33,14 @@ export default function reducer(state = initialState, action = {}) {
       lists.push(action.list)
       return {...state, lists: lists, showForm: false}
 
+    case Constants.CURRENT_BOARD_CARD_CREATED:
+      lists = [...state.lists]
+      const {card} = action
+      const listIndex = lists.findIndex((list) => {
+        return list.id == card.list_id
+      })
+      return {...state, lists: lists}
+
     default:
       return state
   }
