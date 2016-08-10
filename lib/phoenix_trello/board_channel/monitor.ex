@@ -10,6 +10,10 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
     GenServer.call(__MODULE__, {:member_joined, board, member})
   end
 
+  def member_left_board(board, member) do
+    GenServer.call(__MODULE__, {:member_left, board, member})
+  end
+
   # Server callbacks
   def handle_call({:member_joined, board, member}, _from, state) do
     state =
@@ -27,5 +31,18 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
 
           {:reply, Map.get(state, board), state}
       end
+  end
+
+  def handle_call({:member_left, board, member}, _from, state) do
+    new_members =
+      state
+      |> Map.get(board)
+      |> List.delete(member)
+
+    state =
+      state
+      |> Map.update!(board, fn (_) -> new_members end)
+
+    {:reply, new_members, state}
   end
 end
