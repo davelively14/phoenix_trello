@@ -3,7 +3,7 @@ defmodule PhoenixTrello.BoardController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhoenixTrello.SessionController
 
-  alias PhoenixTrello.{Repo, Board}
+  alias PhoenixTrello.{Repo, Board, UserBoard}
 
   def index(conn, _params) do
     current_user = Guardian.Plug.current_resource(conn)

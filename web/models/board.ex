@@ -8,8 +8,9 @@ defmodule PhoenixTrello.Board do
   schema "boards" do
     field :name, :string
     belongs_to :user, PhoenixTrello.User
-    has_many :user_boards, UserBoard
+    has_many :user_boards, PhoenixTrello.UserBoard
     has_many :members, through: [:user_boards, :user]
+    has_many :lists, PhoenixTrello.List
 
     timestamps()
   end
