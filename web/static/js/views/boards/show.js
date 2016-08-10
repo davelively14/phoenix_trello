@@ -5,6 +5,8 @@ import Actions from '../../actions/current_board'
 import Constants from '../../constants'
 import {setDocumentTitle} from '../../utils'
 import BoardMembers from '../../components/board/members'
+import ListCard from '../../components/lists/card'
+import ListForm from '../../components/lists/form'
 
 class BoardsShowView extends React.Component {
   componentDidMount() {
@@ -41,6 +43,58 @@ class BoardsShowView extends React.Component {
     )
   }
 
+  _renderLists() {
+    const {lists, channel, id, addingNewCardInListId} = this.props.currentBoard
+
+    return lists.map((list) => {
+      return (
+        <ListCard
+          key={list.id}
+          boardId={id}
+          dispatch={this.props.dispatch}
+          channel={channel}
+          isAddingNewCard={addingNewCardInListId === list.id}
+          {...list} />
+      )
+    })
+  }
+
+  _renderAddNewList() {
+    const {dispatch, formErrors, currentBoard} = this.props
+
+    if (!currentBoard.showForm) return this._renderAddButton()
+
+    return (
+      <ListForm
+        dispatch={dispatch}
+        errors={formErrors}
+        channel={currentBoard.channel}
+        onCancelClick={this._handleCancelClick} />
+    )
+  }
+
+  _renderAddButton() {
+    return (
+      <div className="list add-new" onClick={::this._handleAddNewClick}>
+        <div className="inner">
+          Add new list...
+        </div>
+      </div>
+    )
+  }
+
+  _handleAddNewClick() {
+    const {dispatch} = this.props
+
+    dispatch(Actions.showForm(true))
+  }
+
+  _handleCancelClick() {
+    const {dispatch} = this.props
+
+    dispatch(Actions.showForm(false))
+  }
+
   render() {
     const {fetching, name} = this.props.currentBoard
 
@@ -59,10 +113,12 @@ class BoardsShowView extends React.Component {
         <div className="canvas-wrapper">
           <div className="canvas">
             <div className="lists-wrapper">
-              {::this._renderAddNewList}
+              {::this._renderLists()}
+              {::this._renderAddNewList()}
             </div>
           </div>
         </div>
+        {this.props.children}
       </div>
     )
   }

@@ -28,6 +28,11 @@ export default function reducer(state = initialState, action = {}) {
       members.push(action.user)
       return {...state, members: members, showUsersForm: false}
 
+    case Constants.CURRENT_BOARD_LIST_CREATED:
+      const lists = [...state.lists]
+      lists.push(action.list)
+      return {...state, lists: lists, showForm: false}
+
     default:
       return state
   }
