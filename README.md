@@ -20,11 +20,11 @@
 
 #### Step by Step
 
-1. Create new Phoenix project without Brunch. Do NOT install dependencies.
+* Create new Phoenix project without Brunch. Do NOT install dependencies.
 ```
 $ mix phoenix.new --no-brunch new_project
 ```
-2. Ensure that the `new_project/config/dev.exs` and `new_project/config/test.exs` files are configured for Postgres (remove `username` and `password` data).
+* Ensure that the `new_project/config/dev.exs` and `new_project/config/test.exs` files are configured for Postgres (remove `username` and `password` data).
 ```
 dev.exs:
 config :new_project, NewProject.Repo,
@@ -41,11 +41,11 @@ config :new_project, NewProject.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 ```
-3. Initialize the database:
+* Initialize the database:
 ```
 $ mix ecto.create
 ```
-4. Navigate to the newly created directory.  Setup the git. Create the repo, `new_project` in this example, on the git account.
+* Navigate to the newly created directory.  Setup the git. Create the repo, `new_project` in this example, on the git account.
 ```
 $ git init
 $ git add .
@@ -53,11 +53,11 @@ $ git commit -m "Initial commit"
 $ git remote add origin https://github.com/davelively14/new_project.git
 $ git push -u origin master
 ```
-5. In the newly created directory `new_project`, create a new `package.json` file:
+* In the newly created directory `new_project`, create a new `package.json` file:
 ```
 $ npm init
 ```
-6. Option A: Open `package.json` and add the base dependencies.
+* Option A: Open `package.json` and add the base dependencies.
 ```
 "devDependencies": {
   "babel-core": "^6.13.2",
@@ -79,7 +79,7 @@ $ npm init
 ```
 npm install
 ```
-6. Option B: Install most recent updates through the terminal. In the `new_project` directory:
+* Option B: Install most recent updates through the terminal. In the `new_project` directory:
 ```
 $ npm install --save-dev babel-core babel-preset-es2015 babel-preset-react babel-loader webpack
   ...
@@ -94,7 +94,7 @@ $ npm install --save react react-router-redux react-router redux react-redux rea
   "phoenix_html": "file:deps/phoenix_html"
 }
 ```
-7. Create the `webpack.config.js` file in the main directory and configure like this:
+* Create the `webpack.config.js` file in the main directory and configure like this:
 ```
 'use strict'
 
@@ -146,7 +146,7 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 ```
-8. Configure Phoenix to to start Webpack every time the dev server is started. Webpack will watch for changes and generate asset functions on the fly. Within `config/dev.exs`, replace the empty `array` value in the `watcher` key in the first config:
+* Configure Phoenix to to start Webpack every time the dev server is started. Webpack will watch for changes and generate asset functions on the fly. Within `config/dev.exs`, replace the empty `array` value in the `watcher` key in the first config:
 ```
 config :new_project, NewProject.Endpoint,
   http: [port: 4000],
@@ -157,14 +157,14 @@ config :new_project, NewProject.Endpoint,
     node: ["node_modules/webpack/bin/webpack.js", "--watch", "--color", cd: Path.expand("../", __DIR__)]
   ]
 ```
-9. Get the Phoenix dependencies and initialize the database
+* Get the Phoenix dependencies and initialize the database
 ```
 mix deps.get
 mix ecto.create
 ```
-10. Create a blank `web\static\js\application.js` file.
-11. Move the `private/static/js/phoenix.js` file to the `web/static/js` folder.
-12. Run the server and everything should be up and running:
+* Create a blank `web\static\js\application.js` file.
+* Move the `private/static/js/phoenix.js` file to the `web/static/js` folder.
+* Run the server and everything should be up and running:
 ```
 $ mix phoenix.server
 ```
